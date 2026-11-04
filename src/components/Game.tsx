@@ -6,7 +6,7 @@ import { BlockList } from './BlockList';
 import { Grid } from './Grid';
 import { Palette } from './Palette';
 import { saveProgress } from '../utils/progress';
-import { playRun, playSuccess, playFail } from '../utils/sound';
+import { playRun, playSuccess, playFail, isSoundEnabled, setSoundEnabled } from '../utils/sound';
 
 export function Game() {
   const { levels, selectedLevelId, progress, updateProgress, setView } = useStore();
@@ -16,6 +16,7 @@ export function Game() {
   const [idx, setIdx] = useState(0);
   const [running, setRunning] = useState(false);
   const [result, setResult] = useState<{ success: boolean; error?: string; stars: number; blocksUsed: number } | null>(null);
+  const [soundOn, setSoundOn] = useState(isSoundEnabled());
   const timerRef = useRef<number | null>(null);
 
   useEffect(() => {
@@ -82,6 +83,7 @@ export function Game() {
         <button onClick={() => setView('home')}>← 홈</button>
         <h2>{level.title}</h2>
         <span className="hint">{level.hint}</span>
+        <button onClick={() => { const next = !soundOn; setSoundOn(next); setSoundEnabled(next); }} aria-label="사운드 토글">{soundOn ? '🔊' : '🔇'}</button>
       </header>
       <div className="game-body">
         <Palette onAdd={(t) => setProgram((p) => [...p, { id: 'b' + Date.now(), type: t, count: t === 'repeat' ? 2 : undefined, body: (t === 'repeat' || t === 'ifObstacle') ? [] : undefined }])} />

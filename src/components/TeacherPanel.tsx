@@ -2,11 +2,12 @@ import { useState } from 'react';
 import { useStore } from '../store';
 import { saveCustomLevels, saveProgress, exportJSON } from '../utils/progress';
 import type { Level, Pos } from '../types';
+import { Grid } from './Grid';
 
 type Tool = 'obstacle' | 'goal' | 'start' | 'erase';
 
 export function TeacherPanel() {
-  const { levels, progress, setLevels, setProgress, setView } = useStore();
+  const { levels, progress, setLevels, setProgress, setView, selectLevel } = useStore();
   const [title, setTitle] = useState('새 레벨');
   const [gridSize, setGridSize] = useState(5);
   const [maxBlocks, setMaxBlocks] = useState(10);
@@ -121,7 +122,21 @@ export function TeacherPanel() {
             );
           })}
         </div>
-        <button onClick={addLevel} style={{ marginTop: '0.5rem' }}>레벨 추가</button>
+        <div className="preview-section">
+          <h4>미리보기</h4>
+          <Grid level={{ id: 'preview', title: 'preview', gridSize, start, obstacles, goals: goals.length ? goals : [{ x: gridSize - 1, y: gridSize - 1 }], maxBlocks, hint }} size={24} />
+        </div>
+        <div className="form-row">
+          <button onClick={addLevel}>레벨 추가</button>
+          <button onClick={() => {
+            const newLevel: Level = { id: 'c_' + Date.now(), title, gridSize, start, obstacles, goals: goals.length ? goals : [{ x: gridSize - 1, y: gridSize - 1 }], maxBlocks, hint };
+            const next = [...levels, newLevel];
+            setLevels(next);
+            saveCustomLevels(next.filter((l) => l.id.startsWith('c_')));
+            selectLevel(newLevel.id);
+          }}>테스트 실행</button>
+        </div>
+
       </section>
       <section className="teacher-section">
         <h3>학생 진행도</h3>

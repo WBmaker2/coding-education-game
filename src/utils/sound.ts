@@ -1,4 +1,11 @@
 let ctx: AudioContext | null = null;
+const SOUND_KEY = 'coding-edu-sound';
+export function isSoundEnabled() {
+  try { return localStorage.getItem(SOUND_KEY) !== 'off'; } catch { return true; }
+}
+export function setSoundEnabled(on: boolean) {
+  try { localStorage.setItem(SOUND_KEY, on ? 'on' : 'off'); } catch {}
+}
 function getCtx() {
   if (!ctx) {
     try { ctx = new (window.AudioContext || (window as any).webkitAudioContext)(); } catch { ctx = null; }
@@ -7,6 +14,7 @@ function getCtx() {
 }
 
 function tone(freq: number, dur: number, type: OscillatorType = 'sine', gain = 0.15) {
+  if (!isSoundEnabled()) return;
   const c = getCtx();
   if (!c) return;
   const osc = c.createOscillator();

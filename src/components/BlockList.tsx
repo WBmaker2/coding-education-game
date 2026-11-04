@@ -81,9 +81,17 @@ export function BlockList({ blocks, onChange, highlightId, depth = 0 }: Props) {
           key={b.id}
           className="block-row"
           draggable
+          tabIndex={0}
+          role="listitem"
+          aria-label={b.type}
           onDragStart={handleDragStart(i)}
           onDragOver={handleDragOver}
           onDrop={handleDrop(i)}
+          onKeyDown={(e) => {
+            if (e.key === 'Delete' || e.key === 'Backspace') { e.preventDefault(); remove(i); }
+            else if (e.key === 'ArrowUp') { e.preventDefault(); move(i, -1); }
+            else if (e.key === 'ArrowDown') { e.preventDefault(); move(i, 1); }
+          }}
         >
           <BlockView
             block={b}

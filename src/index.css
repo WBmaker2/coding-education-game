@@ -86,3 +86,15 @@ textarea { width:100%; }
 .editor-cell.obs { background:#475569; }
 .editor-cell.goal { background:#fef9c3; }
 .editor-cell.start { background:#bfdbfe; }
+
+.block-row:focus-visible, .palette-item:focus-visible, button:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 2px;
+}
+
+@media (max-width: 600px) {
+  .add-btn, .mini-add, .block-actions button { min-width: 44px; min-height: 44px; font-size: 1rem; }
+  .palette-item { padding: .5rem; }
+}
+
+.preview-section { margin: .5rem 0; }
