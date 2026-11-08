@@ -52,22 +52,9 @@ export function BlockView({ block, highlight, onRemove, onMoveUp, onMoveDown, on
             className="block-count"
           />
           <span className="block-times">번</span>
-          <div className="block-body">
-            {(block.body ?? []).length === 0 && <div className="block-empty">여기에 블록을 넣으세요</div>}
-            {(block.body ?? []).map((b) => (
-              <BlockView key={b.id} block={b} highlight={highlight} />
-            ))}
-          </div>
         </>
       )}
-      {block.type === 'ifObstacle' && (
-        <div className="block-body">
-          {(block.body ?? []).length === 0 && <div className="block-empty">여기에 블록을 넣으세요</div>}
-          {(block.body ?? []).map((b) => (
-            <BlockView key={b.id} block={b} highlight={highlight} />
-          ))}
-        </div>
-      )}
+
       {(onRemove || onMoveUp || onMoveDown) && (
         <span className="block-actions">
           {onMoveUp && <button onClick={onMoveUp} aria-label="위로"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 19V5M5 12l7-7 7 7" /></svg></button>}
