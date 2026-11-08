@@ -6,7 +6,7 @@ interface Props {
   size?: number;
 }
 
-const DIR_ARROW = ['→', '↓', '←', '↑'];
+const DIR_ROT = [0, 90, 180, 270];
 
 export function Grid({ level, frame, size = 40 }: Props) {
   const n = level.gridSize;
@@ -31,7 +31,11 @@ export function Grid({ level, frame, size = 40 }: Props) {
         >
           {isGoal && !isCollected && <span className="star">★</span>}
           {isCollected && <span className="star done">★</span>}
-          {isRobot && <span className="robot" aria-label="로봇">{DIR_ARROW[robot.dir]}</span>}
+          {isRobot && (
+            <svg className="robot" viewBox="0 0 24 24" width="75%" height="75%" aria-label="로봇" style={{ transform: `rotate(${DIR_ROT[robot.dir]}deg)` }}>
+              <path d="M4 12h14M12 6l6 6-6 6" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          )}
         </div>
       );
     }
