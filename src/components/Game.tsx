@@ -20,6 +20,16 @@ export function Game() {
   const timerRef = useRef<number | null>(null);
 
   useEffect(() => {
+    if (timerRef.current) window.clearInterval(timerRef.current);
+    timerRef.current = null;
+    setProgram([]);
+    setFrames([]);
+    setIdx(0);
+    setRunning(false);
+    setResult(null);
+  }, [selectedLevelId]);
+
+  useEffect(() => {
     return () => { if (timerRef.current) window.clearInterval(timerRef.current); };
   }, []);
 
