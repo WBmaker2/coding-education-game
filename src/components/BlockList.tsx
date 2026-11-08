@@ -75,7 +75,7 @@ export function BlockList({ blocks, onChange, highlightId, depth = 0 }: Props) {
   };
 
   return (
-    <div className={'block-list depth-' + depth} onDragOver={handleDragOver} onDrop={(e) => { if (e.target === e.currentTarget) { /* container drop append */ } }}>
+    <div className={'block-list depth-' + depth} role="list" onDragOver={handleDragOver} onDrop={(e) => { if (e.target === e.currentTarget) { /* container drop append */ } }}>
       {blocks.map((b, i) => (
         <div
           key={b.id}

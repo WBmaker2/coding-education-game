@@ -47,6 +47,7 @@ export function BlockView({ block, highlight, onRemove, onMoveUp, onMoveDown, on
             min={1}
             max={30}
             value={block.count ?? 2}
+            onClick={(e) => e.stopPropagation()}
             onChange={(e) => onChangeCount?.(Number(e.target.value))}
             className="block-count"
           />

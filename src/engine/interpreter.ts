@@ -22,7 +22,9 @@ export function runProgram(level: Level, program: Block[]): RunResult {
   const goalSet = new Set(level.goals.map(key));
   const collected = new Set<string>();
   const robot = { x: level.start.x, y: level.start.y, dir: level.start.dir as Dir };
-  const frames: Frame[] = [{ robot: cloneRobot(robot), collected: [], highlightId: null }];
+  const startKey = robot.x + ',' + robot.y;
+  if (goalSet.has(startKey)) collected.add(startKey);
+  const frames: Frame[] = [{ robot: cloneRobot(robot), collected: [...collected], highlightId: null }];
   let error: string | undefined;
   let steps = 0;
   const MAX = 3000;

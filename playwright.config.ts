@@ -1,10 +1,10 @@
 import { defineConfig } from '@playwright/test';
 export default defineConfig({
   testDir: './e2e',
-  use: { baseURL: 'http://127.0.0.1:5173' },
+  use: { baseURL: 'http://127.0.0.1:5174/coding-education-game/' },
   webServer: {
-    command: 'npm run dev -- --host 127.0.0.1 --port 5173',
-    url: 'http://127.0.0.1:5173',
+    command: 'npm run dev -- --host 127.0.0.1 --port 5174',
+    url: 'http://127.0.0.1:5174/coding-education-game/',
     reuseExistingServer: true,
     timeout: 120000,
   },
