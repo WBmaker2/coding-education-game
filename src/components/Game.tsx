@@ -97,9 +97,18 @@ export function Game() {
             <BlockList blocks={program} onChange={setProgram} highlightId={highlightId} />
           </div>
           <div className="controls">
-            <button className="run-btn btn-pulse" onClick={handleRun} disabled={running}>▶ 실행</button>
-            <button onClick={handleStop} disabled={!running}>■ 정지</button>
-            <button onClick={handleReset}>↺ 초기화</button>
+            <button className="run-btn btn-pulse" onClick={handleRun} disabled={running}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 5l12 7-12 7V5z" /></svg>
+              실행
+            </button>
+            <button onClick={handleStop} disabled={!running}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="1" /></svg>
+              정지
+            </button>
+            <button onClick={handleReset}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7" /><path d="M3 4v5h5" /></svg>
+              초기화
+            </button>
           </div>
         </div>
         <div className="canvas-col">
