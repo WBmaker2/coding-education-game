@@ -93,6 +93,7 @@ export function BlockList({ blocks, onChange, highlightId, depth = 0 }: Props) {
             else if (e.key === 'ArrowDown') { e.preventDefault(); move(i, 1); }
           }}
         >
+          {depth > 0 && <span className="depth-badge" aria-label={`들여쓰기 ${depth}단계`}>{depth}</span>}
           <BlockView
             block={b}
             highlight={highlightId === b.id}
