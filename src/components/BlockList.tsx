@@ -104,7 +104,17 @@ export function BlockList({ blocks, onChange, highlightId, depth = 0 }: Props) {
             onDragStart={handleDragStart(i)}
           />
           {(b.type === 'repeat' || b.type === 'ifObstacle') && (
-            <div className="nested">
+            <div
+              className="nested"
+              onDragOver={handleDragOver}
+              onDrop={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                const type = e.dataTransfer.getData('application/block-type');
+                if (type) updateBlock(i, { ...b, body: [...(b.body ?? []), makeBlock(type as Block['type'])] });
+              }}
+            >
+              <div className="nested-label">{b.type === 'repeat' ? '반복할 블록' : '조건일 때 실행할 블록'}</div>
               <BlockList
                 blocks={b.body ?? []}
                 onChange={(nb) => updateBlock(i, { ...b, body: nb })}

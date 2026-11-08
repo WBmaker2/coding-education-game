@@ -482,3 +482,4 @@ textarea:focus { border-color: var(--primary); box-shadow: 0 0 0 3px var(--prima
 .block.block-ifObstacle { background: #e3f5ef; border-color: #6ee7b7; }
 .block.block-repeat .block-body { border-left-color: #fcd34d; }
 .block.block-ifObstacle .block-body { border-left-color: #6ee7b7; }
+.nested-label { font-size:.75rem; color:#64748b; margin:.2rem 0; }
